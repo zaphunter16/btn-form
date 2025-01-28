@@ -21,6 +21,7 @@ import { FaTrashAlt } from "react-icons/fa"; // Ikon hapus\\
 
 import withReactContent from "sweetalert2-react-content";
 import Loader from "./Loader";
+import { useNavigate } from "react-router-dom";
 
 const MySwal = withReactContent(Swal);
 
@@ -41,6 +42,8 @@ const Form = () => {
   const [allowedDates, setAllowedDates] = useState({ start: null, end: null });
   const [loading, setLoading] = useState(false);
   const [zoomedImage, setZoomedImage] = useState(null); // Untuk modal zoom gambar
+  const navigate = useNavigate()
+
 
   const handleSweetAlert = () => {
     let isAgreed = false; // Local variable untuk persetujuan
@@ -200,7 +203,7 @@ const Form = () => {
       const startDate = new Date(pelunasanDate);
       startDate.setDate(startDate.getDate() + 7); // H+7
       const endDate = new Date(startDate);
-      endDate.setDate(endDate.getDate() + 6); // H+14
+      endDate.setDate(endDate.getDate() + 7); // H+14
       setAllowedDates({ start: startDate, end: endDate });
       // fetchSesiOptions(startDate.toISOString().split("T")[0]);
     }
@@ -366,7 +369,9 @@ const Form = () => {
           confirmButtonText: "OK",
         }).then(() => {
           // Reload halaman setelah SweetAlert ditutup
-          window.location.reload();
+          // window.location.reload();
+          navigate("/")
+
         });
       }, 1000);
     } catch (error) {
@@ -436,28 +441,44 @@ const Form = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <input
+              <div className="w-1/2">
+                <label className="block font-semibold text-gray-700 text-base mb-1">
+                  Nama Depan <span className="text-red-500">*</span>
+                </label>
+                <input
                 type="text"
                 name="firstName"
                 placeholder="Nama Depan"
-                className="w-1/2 p-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full p-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 value={formData.firstName}
                 onChange={(e) =>
                   setFormData({ ...formData, firstName: e.target.value })
                 }
                 required
               />
-              <input
+                
+              </div>
+
+              <div className="w-1/2">
+              <label className="block font-semibold text-gray-700 text-base mb-1">
+                  Nama Belakang <span className="text-red-500">*</span>
+                </label>
+                <input
                 type="text"
                 name="lastName"
                 placeholder="Nama Belakang"
-                className="w-1/2 p-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full p-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 value={formData.lastName}
                 onChange={(e) =>
                   setFormData({ ...formData, lastName: e.target.value })
                 }
                 required
               />
+              </div>
+              
+
+              
+             
             </motion.div>
             {/* Field lainnya */}
             <div>
@@ -560,7 +581,7 @@ const Form = () => {
                     <option value="">Pilih Salah Satu</option>
                     {sesiOptions.map((option) => (
                       <option key={option.sesi} value={option.sesi}>
-                        {option.sesi} ({option.slots} slot tersedia)
+                        {option.sesi} ({option.slots} jumlah kuota tersedia)
                       </option>
                     ))}
                   </>
