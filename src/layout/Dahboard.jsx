@@ -280,7 +280,7 @@ const Dashboard = () => {
                       : `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(item.email)}`;
                     
                     return (
-                      <a href={emailLink} target="_blank" rel="noopener noreferrer">
+                      <a href={emailLink} target="_blank" rel="noopener noreferrer" className="text-blue-500">
                         {item.email ?? "Tidak Ada"}
                       </a>
                     );
