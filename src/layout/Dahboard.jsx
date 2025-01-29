@@ -273,20 +273,18 @@ const Dashboard = () => {
                   <td className="py-2 px-4">{item.rekening}</td>
                   <td className="py-2 px-4">{item.phone}</td>
                   <td className="py-2 px-4">
-                    <a
-                      className="text-blue-500"
-                      href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(
-                        item.email
-                      )}&su=${encodeURIComponent(
-                        "Judul Email"
-                      )}&body=${encodeURIComponent(
-                        "Halo, ini pesan otomatis."
-                      )}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {item.email ?? "Tidak Ada"}
-                    </a>
+                   {(() => {
+                    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+                    const emailLink = isMobile
+                      ? `mailto:${item.email}`
+                      : `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(item.email)}`;
+                    
+                    return (
+                      <a href={emailLink} target="_blank" rel="noopener noreferrer">
+                        {item.email ?? "Tidak Ada"}
+                      </a>
+                    );
+                   })()}
                   </td>
                   <td className="py-2 px-4">{item.tanggalPelunasan}</td>
                   <td className="py-2 px-4">{item.tanggalPengambilan}</td>
