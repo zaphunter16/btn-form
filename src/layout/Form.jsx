@@ -16,7 +16,6 @@ import { id } from "date-fns/locale";
 import Swal from "sweetalert2";
 import { motion } from "framer-motion";
 import "react-image-crop/dist/ReactCrop.css"; // Import CSS untuk react-image-crop
-import ReactCrop from "react-image-crop"; // Import react-image-crop
 import { FaTrashAlt } from "react-icons/fa"; // Ikon hapus\\
 
 import withReactContent from "sweetalert2-react-content";
@@ -31,6 +30,7 @@ const Form = () => {
     lastName: "",
     rekening: "",
     phone: "",
+    email: "",
     tanggalPelunasan: "",
     tanggalPengambilan: "",
     sesi: "",
@@ -429,7 +429,7 @@ const Form = () => {
               alt="BTN Logo"
               className="mx-auto mb-4 h-20 w-20"
             />
-            <h1 className="text-3xl font-extrabold text-blue-700">
+            <h1 className="text-3xl font-extrabold text-blue-700 te">
               Formulir BTN Easy-Doc
             </h1>
             <p className="text-gray-700">Bank Tabungan Negara Tbk.</p>
@@ -515,6 +515,26 @@ const Form = () => {
               />
             </div>
 
+            <div>
+              <label className="block font-semibold text-gray-700">
+                Alamat Email <span className="text-red-500">*</span>
+              </label>
+              <input
+                type="text"
+                name="email"
+                placeholder="Alamat Email"
+                className="w-full p-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                value={formData.email}
+                onChange={(e) =>
+                  setFormData({ ...formData, email: e.target.value })
+                }
+                required
+              />
+               <p className="text-xs text-gray-500 mt-2">
+                  Pastikan Email yang anda cantumkan benar dan aktif !
+                </p>
+            </div>
+
             <div className="flex  space-x-4">
               {/* Tanggal Pelunasan */}
               <div className="w-full md:w-1/2 px-2">
@@ -534,6 +554,7 @@ const Form = () => {
                   }
                   required
                 />
+                
               </div>
 
               {/* Tanggal Pengambilan */}

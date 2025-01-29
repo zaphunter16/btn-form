@@ -54,16 +54,6 @@ const Dashboard = () => {
     setSortedData(filteredData);
   };
 
-  //   const handleSort = (field) => {
-  //     const direction = sortDirection === "asc" ? "desc" : "asc";
-  //     const sorted = [...sortedData].sort((a, b) => {
-  //       if (a[field] < b[field]) return direction === "asc" ? -1 : 1;
-  //       if (a[field] > b[field]) return direction === "asc" ? 1 : -1;
-  //       return 0;
-  //     });
-  //     setSortedData(sorted);
-  //     setSortDirection(direction);
-  //   };
   const handleSort = (field) => {
     const direction = sortDirection === "asc" ? "desc" : "asc";
     const sorted = [...sortedData].sort((a, b) => {
@@ -123,6 +113,37 @@ const Dashboard = () => {
   useEffect(() => {
     applyFilters();
   }, [startDate, endDate, searchTerm, filterField]);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+
+  // Hitung total halaman
+  const totalPages = Math.ceil(sortedData.length / itemsPerPage);
+
+  // Data yang ditampilkan berdasarkan halaman saat ini
+  const paginatedData = sortedData.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
+  // Fungsi untuk navigasi ke halaman berikutnya
+  const nextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  // Fungsi untuk navigasi ke halaman sebelumnya
+  const prevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  // Fungsi untuk berpindah langsung ke halaman tertentu
+  const goToPage = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 p-6">
@@ -220,6 +241,8 @@ const Dashboard = () => {
                 >
                   Rekening
                 </th>
+                <th className="py-2 px-4 text-left cursor-pointer">Telepon</th>
+                <th className="py-2 px-4 text-left cursor-pointer">Email</th>
                 <th
                   className="py-2 px-4 text-left cursor-pointer"
                   onClick={() => handleSort("tanggalPelunasan")}
@@ -244,10 +267,16 @@ const Dashboard = () => {
               </tr>
             </thead>
             <tbody>
-              {sortedData.map((item) => (
+              {paginatedData.map((item) => (
                 <tr key={item.id} className="hover:bg-gray-100">
                   <td className="py-2 px-4">{`${item.firstName} ${item.lastName}`}</td>
                   <td className="py-2 px-4">{item.rekening}</td>
+                  <td className="py-2 px-4">{item.phone}</td>
+                  <td className="py-2 px-4">
+                    <a href={`mailto:${item.email}`}>
+                      {item.email ?? "Tidak Ada"}
+                    </a>
+                  </td>
                   <td className="py-2 px-4">{item.tanggalPelunasan}</td>
                   <td className="py-2 px-4">{item.tanggalPengambilan}</td>
                   <td className="py-2 px-4">{formatDate(item.created_at)}</td>
@@ -296,6 +325,49 @@ const Dashboard = () => {
               )}
             </tbody>
           </table>
+
+          {/* Paginasi Data */}
+          <div className="flex justify-between items-center mt-4">
+            <button
+              onClick={prevPage}
+              disabled={currentPage === 1}
+              className={`px-4 py-2 bg-blue-500 text-white rounded-lg ${
+                currentPage === 1
+                  ? "opacity-50 cursor-not-allowed"
+                  : "hover:bg-blue-600"
+              }`}
+            >
+              Prev
+            </button>
+
+            <div className="flex space-x-2">
+              {[...Array(totalPages).keys()].map((number) => (
+                <button
+                  key={number + 1}
+                  onClick={() => goToPage(number + 1)}
+                  className={`px-3 py-1 rounded-md ${
+                    currentPage === number + 1
+                      ? "bg-blue-600 text-white"
+                      : "bg-gray-300 text-black hover:bg-gray-400"
+                  }`}
+                >
+                  {number + 1}
+                </button>
+              ))}
+            </div>
+
+            <button
+              onClick={nextPage}
+              disabled={currentPage === totalPages}
+              className={`px-4 py-2 bg-blue-500 text-white rounded-lg ${
+                currentPage === totalPages
+                  ? "opacity-50 cursor-not-allowed"
+                  : "hover:bg-blue-600"
+              }`}
+            >
+              Next
+            </button>
+          </div>
         </div>
       </main>
     </div>

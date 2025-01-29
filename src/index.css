@@ -3,6 +3,7 @@
 
 * {
     font-family: "Arial Narrow", Arial, sans-serif;
+    user-select: none;
 }
 
 html {

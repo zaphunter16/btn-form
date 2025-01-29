@@ -6,9 +6,10 @@ export default function Home()
         <div className="bg-blue-50 min-h-screen flex flex-col w-[100vw]">
       {/* Header */}
       <header className="bg-yellow-400 text-white py-4 px-6 md:px-12 shadow-md flex items-center justify-between">
-        <h1 className="text-2xl font-bold">
-          <span className="text-yellow-400"><img className="w-20" src="/img/logo.png" alt="" /></span> 
-        </h1>
+        <div className="flex  ">
+          <img className="w-20 h-20" src="/img/logo.png" alt="" /> 
+          <h2 className="text-3xl text-blue-600 mt-7 ms-1 font-extrabold"><strong>Easy-Doc</strong></h2>
+        </div>
         <Link
           to="/login"
           className="px-4 py-2   bg-blue-600 text-white font-extrabold rounded-lg shadow transition duration-300"
@@ -26,19 +27,11 @@ export default function Home()
             Kemudahan Dokumen Bersama BTN Easy-Doc
           </h2>
           <p className="text-lg text-blue-600 max-w-2xl mx-auto">
-            Pelunasan & Pengambilan dokumen lebih mudah, cepat, dan aman bersama btn 
-            <img src="/img/logo.png" className="mx-1 justify-center w-10 h-10 inline-block"></img>
+            Pelunasan & Pengambilan dokumen lebih mudah, cepat, dan aman bersama 
+            <img src="/img/logo.png" className="mx-1 justify-center w-10 h-10 inline-block mt-[-5px]"></img>
           </p>
         </section>
 
-        {/* Illustration */}
-        {/* <div className="mb-10">
-          <img
-            src="https://via.placeholder.com/400x300" // Ganti dengan ilustrasi atau gambar terkait
-            alt="Ilustrasi Kemudahan"
-            className="mx-auto max-w-full rounded-lg shadow-md"
-          />
-        </div> */}
 
         {/* Call-to-Action Card */}
         <div className="bg-blue-50 shadow-lg rounded-lg overflow-hidden w-full md:w-2/3 lg:w-1/2">
