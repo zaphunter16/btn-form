@@ -46,9 +46,9 @@ export default function Home() {
         } rounded bg-blue-600 text-white transition-all duration-500 shadow-2xl shadow-blue-500`}
         style={{ zIndex: "0" }}
       >
-        <ul className="w-32 px-5 py-3 text-center ">
-          <li>Login</li>
-        </ul>
+        <Link to="/login" className="w-32 px-5 py-3 text-center ">
+          Login
+        </Link>
       </div>
 
       {/* Hero Section */}
