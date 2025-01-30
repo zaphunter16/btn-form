@@ -46,9 +46,11 @@ export default function Home() {
         } rounded bg-blue-600 text-white transition-all duration-500 shadow-2xl shadow-blue-500`}
         style={{ zIndex: "0" }}
       >
-        <Link to="/login" className="w-32 px-5 py-3 text-center ">
-          Login
-        </Link>
+        <ul className="w-32 px-5 py-3 text-center ">
+          <li>
+            <Link to="/login">Login</Link>
+          </li>
+        </ul>
       </div>
 
       {/* Hero Section */}
@@ -92,11 +94,18 @@ export default function Home() {
             <div className="flex flex-col items-center md:items-start gap-2 mt-4">
               <div className="flex items-center">
                 <MdLocationOn className="text-xl mr-2" />
-                <span>Jl. Ahmad Yani No.15, Rw1, Sidokumpul, Kec. Sidoarjo, Kabupaten Sidoarjo, Jawa Timur 61212  </span>
+                <span>
+                  Jl. Ahmad Yani No.15, Rw1, Sidokumpul, Kec. Sidoarjo,
+                  Kabupaten Sidoarjo, Jawa Timur 61212{" "}
+                </span>
               </div>
               <div className="flex items-center">
                 <MdEmail className="text-xl mr-2" />
-                <span><a href="mailto:kc.sidoarjo@btn.co.id">kc.sidoarjo@btn.co.id</a></span>
+                <span>
+                  <a href="mailto:kc.sidoarjo@btn.co.id">
+                    kc.sidoarjo@btn.co.id
+                  </a>
+                </span>
               </div>
               <div className="flex items-center">
                 <MdPhone className="text-xl mr-2" />
