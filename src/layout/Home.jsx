@@ -60,7 +60,7 @@ export default function Home() {
             BTN Easy-Doc
           </h2>
           <p className="text-lg text-blue-600 max-w-2xl mx-auto">
-            Nikmati kemudahan layanan untuk peluanasan dan pengambilan dokumen lebih cepat dan tepat.
+            Nikmati kemudahan layanan untuk pelunasan dan pengambilan dokumen lebih cepat dan tepat
             {/* <img
               src="/img/logo.png"
               className="mx-1 justify-center w-10 h-10 inline-block mt-[-5px]"
